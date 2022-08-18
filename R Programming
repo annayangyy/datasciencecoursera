@@ -1,6 +1,32 @@
-R Programming
+##This function creates a special “matrix” object that can match its inverse.
 
-- to read a file it must be in your directory. 
-- getwd(), see you current directory. 
-- change directory by going to session or command setwd("path name"). 
-- dir(), listing all the file in a selcted directory. 
+makeCacheMatrix <- function(x = matrix()) { 
+    inv <- NULL    ## Initialize the inverse property                         
+    set <- function(y) {   ## Method to set the matrix                 
+        x <<- y                            
+        inv <<- NULL                        
+    }
+    get <- function() x                     
+    setinverse <- function(inverse) inv <<- inverse 
+    getinverse <- function() inv                     
+    list(set = set, get = get, setinverse = setinverse, getinverse = getinverse)  
+}
+
+
+
+
+##This function computes the inverse of the special “matrix”
+
+cacheSolve <- function(x, ...) {
+        ## Return a matrix that is the inverse of 'x'
+    ## Return a matrix that is the inverse of 'x'
+    inv <- x$getinverse()
+    if(!is.null(inv)) {
+        message("getting cached data")
+        return(inv)
+    }
+    data <- x$get() ## Get the matrix from our object
+    inv <- solve(data, ...)
+    x$setinverse(inv)
+    inv ## Return the matrix
+}
