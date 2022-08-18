@@ -1,0 +1,6 @@
+R Programming
+
+- to read a file it must be in your directory. 
+- getwd(), see you current directory. 
+- change directory by going to session or command setwd("path name"). 
+- dir(), listing all the file in a selcted directory. 
